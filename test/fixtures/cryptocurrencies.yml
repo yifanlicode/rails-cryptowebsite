@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uuid: MyString
+  symbol: MyString
+  name: MyString
+  color: MyString
+  icon_url: MyString
+  market_cap: MyString
+  price: MyString
+  listed_at: 1
+  tier: 1
+  change: MyString
+  rank: 1
+  sparkline: MyText
+  low_volume: false
+  coinranking_url: MyString
+  24h_volume: MyString
+
+two:
+  uuid: MyString
+  symbol: MyString
+  name: MyString
+  color: MyString
+  icon_url: MyString
+  market_cap: MyString
+  price: MyString
+  listed_at: 1
+  tier: 1
+  change: MyString
+  rank: 1
+  sparkline: MyText
+  low_volume: false
+  coinranking_url: MyString
+  24h_volume: MyString
