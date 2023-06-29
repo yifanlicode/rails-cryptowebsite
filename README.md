@@ -130,18 +130,11 @@ class CryptocurrenciesWatchlist < ApplicationRecord
 end
 ```
 
-**1.7** **- Data Sources -** Write the seeds.rb script to pull in the data from your various sources into your database. You can use Faker as one of your data sources. Multiple CSV files and multiple endpoints from the same API will be considered separate data sources. 
-可以使用 Faker 或者 CSV
+### 1.5 Seed Script
 
-🕯️ **1.7** Data is pulled from a single data source. (Faker is 1 source)
-            💡 **1.7** Data is pulled from two data sources.
-            如果是 2 个数据源 会加分
-            🔥 **1.7** Data is pulled from three or more data sources.
-            3 个 8 分
+![Clipboard - 2023-06-29 13.11.16.png](https://s2.loli.net/2023/06/30/NSvsG5t9qYbhgHr.png)
 
-**For feature 1.7 the minimum number of table rows populated by your seed script is 200 rows. By this I mean 200 including rows from all tables.**
-
-### 2 - Web Site Navigation
+##
 
 这是做 views
 
