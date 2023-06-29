@@ -83,50 +83,25 @@ rails generate model Watchlist user:references name:string
 rails generate model CryptocurrenciesWatchlists cryptocurrency:references watchlist:references
 ```
 
-### 1.4 Model Associations
+### 1.4 Model Associations and Validations
 
 ```ruby
 class User < ApplicationRecord
-  has_secure_password
   has_many :watchlists
   has_many :cryptocurrencies, through: :watchlists
+
+  validates :username, presence: true
+  validates :email, presence: true
+  validates :password_digest, presence: true
 end
 
 class Cryptocurrency < ApplicationRecord
   has_many :cryptocurrencies_watchlists
   has_many :watchlists, through: :cryptocurrencies_watchlists
-end
 
-class Watchlist < ApplicationRecord
-  belongs_to :user
-  has_many :cryptocurrencies_watchlists
-  has_many :cryptocurrencies, through: :cryptocurrencies_watchlists
-end
-
-class CryptocurrenciesWatchlist < ApplicationRecord
-  belongs_to :cryptocurrency
-  belongs_to :watchlist
-end
-```
-
-### 1.5 Model Associations and Validations
-
-```ruby
-
-class User < ApplicationRecord
-  has_secure_password
-  has_many :watchlists
-  has_many :cryptocurrencies, through: :watchlists
-  validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true
-end
-
-class Cryptocurrency < ApplicationRecord
-  has_many :cryptocurrencies_watchlists
-  has_many :watchlists, through: :cryptocurrencies_watchlists
-  validates :uuid, presence: true, uniqueness: true
-  validates :symbol, presence: true, uniqueness: true
-  validates :name, presence: true, uniqueness: true
+  validates :uuid, presence: true
+  validates :symbol, presence: true
+  validates :name, presence: true
   validates :color, presence: true
   validates :icon_url, presence: true
   validates :market_cap, presence: true
@@ -135,23 +110,23 @@ class Cryptocurrency < ApplicationRecord
   validates :tier, presence: true
   validates :change, presence: true
   validates :rank, presence: true
-  validates :sparkline, presence: true
-  validates :low_volume, presence: true
-  validates :coinranking_url, presence: true
-  validates :volume_24h, presence: true
-end
-
+  end
 
 class Watchlist < ApplicationRecord
   belongs_to :user
   has_many :cryptocurrencies_watchlists
   has_many :cryptocurrencies, through: :cryptocurrencies_watchlists
+
+  validates :user_id, presence: true
   validates :name, presence: true
 end
 
-class CryptocurrenciesWatchlists < ApplicationRecord
+class CryptocurrenciesWatchlist < ApplicationRecord
   belongs_to :cryptocurrency
   belongs_to :watchlist
+
+  validates :cryptocurrency_id, presence: true
+  validates :watchlist_id, presence: true
 end
 ```
 
