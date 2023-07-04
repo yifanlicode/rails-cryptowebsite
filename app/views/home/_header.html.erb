@@ -1,0 +1,39 @@
+
+
+<%# Navbar %>
+
+
+<nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <div class="navbar-brand d-flex align-items-center">
+      <%= link_to root_path do %>
+        <img src="<%= asset_path('doge.png') %>" alt="logo" class="img-logo">
+      <% end %>
+      <%= link_to 'CoinRocket', root_path, class: "navbar-brand"%>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  
+      <form class="d-flex ms-lg-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <li class="nav-item ms-lg-2 ">
+           <%= link_to "About APIs",
+          home_about_path,class:"nav-link #{'active' if controller_name == 'home' && action_name == 'about'}"
+          %>
+      </li>
+   
+    </ul>
+  
+  </div>
+</div>
+</nav>
+<br>

@@ -13,3 +13,92 @@
  *= require_tree .
  *= require_self
  */
+
+/* set the Font */
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,700|Montserrat:400,700&display=swap");
+
+/* set the background color */
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #222222;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  background-color: #f8f9fa;
+}
+
+.img-erd {
+  width: 400px;
+  height: auto;
+}
+
+.img-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.navbar-brand {
+  font-size: 18px;
+  font-weight: 800px;
+}
+
+.content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.content p {
+  color: #555;
+  font-size: 18px;
+}
+
+.note {
+  color: #999;
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.about-content h3 {
+  font-size: 24px;
+  font-weight: 600px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ef824a;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+.placeholder-gray::placeholder {
+  color: #999999;
+}
+
+.placeholder-gray:-ms-input-placeholder {
+  color: #999999;
+}
+
+.placeholder-gray::-ms-input-placeholder {
+  color: #999999;
+}
+
+.custom-date-field {
+  color: #999999 !important;
+}
+
+.about-content a {
+  color: #111111;
+}
