@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :cryptocurrencies
-  resources :users
-  resources :sessions
-
 
   get 'home/about', to: 'home#about'
   root 'home#index'

@@ -4,11 +4,10 @@ require 'json'
 require 'net/http'
 
 # Seed fake data using Faker gem
-30.times do
+50.times do
   User.create!(
-    username: Faker::Internet.unique.username,
     email: Faker::Internet.unique.email,
-    password_digest: Faker::Internet.password
+    password: Faker::Internet.password
   )
 end
 
