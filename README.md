@@ -180,8 +180,10 @@ path:
 
 #### 3.2 Display One cryptocurrecy by :id in a detail page
 
+`app/views/cryptocurrencies/_cryptocurrency.html.erb`
+`app/views/cryptocurrencies/show.html.erb`
+
 💡 **3.3** **- Multi-model Data on Member Pages -**  On the individual entry pages (3.2) data pulled from associated models is also present.
-这个没理解
 
 **🔥 3.4** **- Hierarchical Collection Navigation -** Data can be navigated by category or hierarchically based on a one-to-many or many-to-many relationship. (This means being able to navigate via a link back and forth between the “show” pages of your associations. For example, category “show” pages that link to the  “show” page of all items in that category, with the “show” pages of each item linking back to the “show” page of the item’s category.)
 分类

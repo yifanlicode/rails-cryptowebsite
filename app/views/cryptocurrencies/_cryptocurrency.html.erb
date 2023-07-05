@@ -1,11 +1,21 @@
-<div id="<%= dom_id cryptocurrency %>" class="card">
-  <div class="card-header bg-secondary text-white">
-    <h3 class="card-title">
-      <%= image_tag cryptocurrency.icon_url, class: "img-fluid img-coin" %>
-      <%= cryptocurrency.name %>
-    </h3>
+<div id="<%= dom_id cryptocurrency %>"
+style="box-shadow: 0 0 5px <%= cryptocurrency.color %>, 0 0 10px rgba(0, 0, 0, 0.1);"
+  class="card">
+
+<%# header  %>
+  <div class="card-header bg-secondary text-white d-flex align-items-center">
+    <%= image_tag cryptocurrency.icon_url, class: "img-fluid img-coin" %>
+    <div class="ms-3">
+      <h3 class="card-title my-auto">
+        <%= cryptocurrency.name %>
+      </h3>
+    </div>
   </div>
-  <div class="card-body">
+
+
+<%# body  %>
+  <div class="card-body" >
+
     <p class="card-text">
       <strong>Rank:</strong> <%= cryptocurrency.rank %>
     </p>
@@ -22,71 +32,17 @@
     <p class="card-text">
       <strong>Market Cap:</strong> $<%= number_with_delimiter(cryptocurrency.market_cap) %>
     </p>
-
+    <p class="card-text">
+      <strong>Update:</strong> <%= cryptocurrency.updated_at %>
+    </p>
+  
     <%# sparkline %>
-    <div class="chart-container" style="width: 800px; height: 200px;">
+    <div class="chart-container" style="width: 800px; height: 200px;" id="sparkline-data">
       <strong>Last 20 days:</strong>
       <canvas id="sparkline-<%= dom_id @cryptocurrency %>"></canvas>
     </div>
   </div>
 
-  <%# Show sparkline with Chart.js %>
-  <script type="text/javascript">
-    const ctx = document.getElementById("sparkline-<%= dom_id @cryptocurrency %>").getContext('2d');
-    const data = <%= @sparkline_data.to_json.html_safe %>;
-
-    var chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: Array.from({ length: data.length }, (_, i) => ''),
-        datasets: [{
-          label: 'Price',
-          data: data,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1,
-          fill: true,
-          tension: 0.4
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: {
-            display: false
-          },
-          y: {
-            display: false,
-            ticks: {
-              callback: function (value, index, values) {
-                // Convert large numbers to abbreviated format
-                const abbreviations = ['K', 'M', 'B', 'T'];
-                let newValue = value;
-                let suffix = '';
-                if (newValue >= 1000) {
-                  const suffixIndex = Math.floor(Math.log10(newValue) / 3);
-                  newValue /= 1000 ** suffixIndex;
-                  suffix = abbreviations[suffixIndex - 1];
-                }
-                return newValue + suffix;
-              }
-            },
-            min: Math.min(...data) * 0.95,
-            max: Math.max(...data) * 1.05
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: false
-          }
-        }
-      }
-    });
-  </script>
 </div>
 
-
+<br>

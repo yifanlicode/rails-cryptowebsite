@@ -108,3 +108,8 @@ h6 {
 .custom-data-center {
   text-align: center;
 }
+
+.card {
+  margin-top: 50px;
+  border: 5px;
+}

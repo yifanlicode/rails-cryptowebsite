@@ -1,10 +1,10 @@
 <nav class="navbar bg-primary navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <div class="navbar-brand d-flex align-items-center">
-      <%= link_to root_path do %>
+      <%= link_to cryptocurrencies_path do %>
         <img src="<%= asset_path('doge.png') %>" alt="logo" class="img-logo">
       <% end %>
-      <%= link_to 'CoinRocket', root_path, class: "navbar-brand"%>
+      <%= link_to 'CoinRocket', cryptocurrencies_path, class: "navbar-brand"%>
     </div>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,8 +14,14 @@
   
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <%# catagories %>
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+      <%# Home Page %>
+      <li class="nav-item ms-lg-2 ">
+        <%= link_to "Home",root_path,
+        class:"nav-link #{'active' if controller_name == 'home' && action_name == 'index'}"
+        %>
+
 
       <%# Coin List Page %>
       <li class="nav-item ms-lg-2 ">
