@@ -130,7 +130,7 @@ class CryptocurrenciesWatchlist < ApplicationRecord
 end
 ```
 
-### 1.5 Seed Script
+#### 1.5 Seed Script
 
 ```bash
 rails db:seed

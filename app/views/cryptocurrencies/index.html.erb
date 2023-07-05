@@ -1,9 +1,8 @@
 <%# app/views/cryptocurrencies/index.html.erb %>
 
 <table class="table table-hover table-striped table-bordered">
-   <thead class="table-dark">
+   <thead class="table-dark custom-data-center">
         <tr>
-        <th> </th>
         <th> Rank </th>
         <th> Logo </th>
         <th> Coin </th>
@@ -11,43 +10,38 @@
         <th> 1d </th>
         <th> 24h Volumn </th>
         <th> Market Cap </th>
+        <th> Watchlist </th>
+
         </tr>
     </thead>
 
         <tbody>
         <% @cryptocurrencies.each do |cryptocurrency| %>
                 <tr>
-
-                <td>
-                  <%= link_to cryptocurrency_path(cryptocurrency) do %>
-                    <% if current_user.watchlist_cryptocurrencies.include?(cryptocurrency) %>
-                      <%= icon('star', class: 'star-icon active') %>
-                    <% else %>
-                      <%= icon('star', class: 'star-icon') %>
-                    <% end %>
-                  <% end %>
-                </td>
-               
-               
-               
-                <td> <%= cryptocurrency.rank %> </td>
-                <td> 
+              
+                <td class="custom-data-center"> <%= cryptocurrency.rank %> </td>
+                <td class="custom-data-center"> 
                   <%= image_tag cryptocurrency.icon_url, 
-                  class: "img-fluid img-coin" %> 
+                  class: "img-fluid img-coin custom-icon" %>
                 </td>
 
-                <td> 
+                <td class="custom-data-center"> 
                   <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 
                 </td>
 
-                <td> <%= cryptocurrency.price %> </td>
+                <td class="custom-data-right"> $<%= number_with_precision(cryptocurrency.price, precision: 2) %> </td>
 
-                <td class="<%= cryptocurrency.change.to_f.negative? ? 'text-danger' : 'text-success' %>">
+                <td class="<%= cryptocurrency.change.to_f.negative? ? 'text-danger' : 'text-success' %> custom-data-center">
                   <%= cryptocurrency.change %>%
                 </td>
 
-                <td> <%= cryptocurrency.volume_24h %> </td>
-                <td> <%= cryptocurrency.market_cap %> </td>
+                <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.volume_24h) %> </td>
+                <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
+                <td class="custom-data-center"> 
+                  <%= link_to 'Add', watchlists_path(cryptocurrency_id: cryptocurrency.id), method: :post, class: "btn btn-sm btn-primary" %>
+                  <%# delete %>
+                  <%= link_to 'Remove', watchlists_path(cryptocurrency_id: cryptocurrency.id), method: :delete, class: "btn btn-sm btn-danger" %>
+                </td>
                 </tr>
         <% end %>
 

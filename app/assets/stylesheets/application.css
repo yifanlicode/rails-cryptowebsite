@@ -7,7 +7,10 @@ body {
   letter-spacing: 0.5px;
   background-color: #f8f9fa;
 }
-
+.img-coin {
+  width: 40px;
+  margin-right: 10px;
+}
 .img-erd {
   width: 400px;
   height: auto;
@@ -92,4 +95,16 @@ h6 {
 
 .about-content a {
   color: #111111;
+}
+.custom-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.custom-data-right {
+  text-align: right;
+}
+
+.custom-data-center {
+  text-align: center;
 }

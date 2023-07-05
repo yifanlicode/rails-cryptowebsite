@@ -3,17 +3,11 @@
 require 'json'
 require 'net/http'
 
-# Seed fake data using Faker gem
-50.times do
-  User.create!(
-    email: Faker::Internet.unique.email,
-    password: Faker::Internet.password
-  )
-end
+
 
 # Seed data from CoinRanking API
 
-url = 'https://api.coinranking.com/v2/coins'
+url = 'https://api.coinranking.com/v2/coins?limit=200'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 data = JSON.parse(response)
@@ -38,5 +32,13 @@ coin_data.each do |coin|
   )
 end
 
+
+# Seed fake data using Faker gem
+50.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: Faker::Internet.password
+  )
+end
 
 puts 'Seeding completed!'
