@@ -1,0 +1,62 @@
+<%# app/views/cryptocurrencies/index.html.erb %>
+
+<table class="table table-hover table-striped table-bordered">
+   <thead class="table-dark">
+        <tr>
+        <th> </th>
+        <th> Rank </th>
+        <th> Logo </th>
+        <th> Coin </th>
+        <th> Price </th>
+        <th> 1d </th>
+        <th> 24h Volumn </th>
+        <th> Market Cap </th>
+        </tr>
+    </thead>
+
+        <tbody>
+        <% @cryptocurrencies.each do |cryptocurrency| %>
+                <tr>
+
+                <td>
+                  <%= link_to cryptocurrency_path(cryptocurrency) do %>
+                    <% if current_user.watchlist_cryptocurrencies.include?(cryptocurrency) %>
+                      <%= icon('star', class: 'star-icon active') %>
+                    <% else %>
+                      <%= icon('star', class: 'star-icon') %>
+                    <% end %>
+                  <% end %>
+                </td>
+               
+               
+               
+                <td> <%= cryptocurrency.rank %> </td>
+                <td> 
+                  <%= image_tag cryptocurrency.icon_url, 
+                  class: "img-fluid img-coin" %> 
+                </td>
+
+                <td> 
+                  <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 
+                </td>
+
+                <td> <%= cryptocurrency.price %> </td>
+
+                <td class="<%= cryptocurrency.change.to_f.negative? ? 'text-danger' : 'text-success' %>">
+                  <%= cryptocurrency.change %>%
+                </td>
+
+                <td> <%= cryptocurrency.volume_24h %> </td>
+                <td> <%= cryptocurrency.market_cap %> </td>
+                </tr>
+        <% end %>
+
+        </tbody>
+</table>
+
+<br>
+
+
+
+            
+    

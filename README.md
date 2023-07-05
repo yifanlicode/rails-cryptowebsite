@@ -135,7 +135,7 @@ rails db:seed
 
 ### 2. Web Site Navigation
 
-#### 2.1 About Page
+**Navbar and About Page**
 
 app/controllers/home_controller.rb
 
@@ -155,11 +155,9 @@ app/views/home/\_header.html.erb
 config/routes.rb
 
 ```ruby
-get '/about',to:'home#about'
+  get 'home/about', to: 'home#about'
+  root 'home#index'
 ```
-
-做一个简单的页面来介绍，比如 navbar ，做一个 about 页面，一些功能页
-💡 **2.2 - Menu -** There is a menu present on all pages that includes links to two or more locations. (For example, a menu with a link to your homepage and your about page.)
 
 ## 3 - Data Navigation
 
