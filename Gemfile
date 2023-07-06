@@ -17,6 +17,8 @@ gem 'rails-erd', group: :development
 gem 'devise', '~> 4.9', '>= 4.9.2'
 gem 'faker'
 gem 'jquery-rails'
+gem 'kaminari'
+
 
 
 group :development, :test do

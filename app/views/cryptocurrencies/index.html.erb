@@ -1,4 +1,5 @@
 <%# app/views/cryptocurrencies/index.html.erb %>
+<%= paginate @cryptocurrencies %>
 
 <table class="table table-hover table-striped table-bordered">
 
@@ -50,5 +51,7 @@
 
   </tbody>
 </table>
+
+<%= paginate @cryptocurrencies %>
 
 
