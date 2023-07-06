@@ -1,56 +1,81 @@
 <%# app/views/cryptocurrencies/index.html.erb %>
 
 <table class="table table-hover table-striped table-bordered">
+
    <thead class="table-dark custom-data-center">
         <tr>
-        <th> Rank </th>
-        <th> Logo </th>
-        <th> Coin </th>
-        <th> Price </th>
-        <th> 1d </th>
-        <th> 24h Volumn </th>
-        <th> Market Cap </th>
-        <th> Watchlist </th>
-
+          <th> Rank </th>
+          <th> Logo </th>
+          <th> Coin </th>
+          <th> Price </th>
+          <th> 1d </th>
+          <th> 24h Volumn </th>
+          <th> Market Cap </th>
+          <th> Watchlist </th>
         </tr>
     </thead>
 
-        <tbody>
-        <% @cryptocurrencies.each do |cryptocurrency| %>
-                <tr>
-              
-                <td class="custom-data-center"> <%= cryptocurrency.rank %> </td>
-                <td class="custom-data-center"> 
-                  <%= image_tag cryptocurrency.icon_url, 
-                  class: "img-fluid img-coin custom-icon" %>
-                </td>
+  <tbody>
+    <% @cryptocurrencies.each do |cryptocurrency| %>
 
-                <td class="custom-data-center"> 
-                  <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 
-                </td>
+      <tr>      
 
-                <td class="custom-data-right"> $<%= number_with_precision(cryptocurrency.price, precision: 2) %> </td>
+          <td class="custom-data-center"> <%= cryptocurrency.rank %> </td>
+          <td class="custom-data-center"> 
+            <%= image_tag cryptocurrency.icon_url,  class: "img-fluid img-coin custom-icon" %>
+          </td>
+          <td class="custom-data-center"> 
+            <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 
+          </td>
+          <td class="custom-data-right"> $<%= number_with_precision(cryptocurrency.price, precision: 2) %> </td>
+          <td class="<%= cryptocurrency.change.to_f.negative? ? 'text-danger' : 'text-success' %> custom-data-center">
+            <%= cryptocurrency.change %>%
+          </td>
+          <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.volume_24h) %> </td>
+          <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
 
-                <td class="<%= cryptocurrency.change.to_f.negative? ? 'text-danger' : 'text-success' %> custom-data-center">
-                  <%= cryptocurrency.change %>%
-                </td>
-
-                <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.volume_24h) %> </td>
-                <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
-                <td class="custom-data-center"> 
-                  <%= link_to 'Add', watchlists_path(cryptocurrency_id: cryptocurrency.id), method: :post, class: "btn btn-sm btn-primary" %>
-                  <%# delete %>
-                  <%= link_to 'Remove', watchlists_path(cryptocurrency_id: cryptocurrency.id), method: :delete, class: "btn btn-sm btn-danger" %>
-                </td>
-                </tr>
+       <td class="custom-data-center">
+       <% if user_signed_in? %>
+        <% if current_user.watchlists.joins(:cryptocurrencies).where(cryptocurrencies: { id: cryptocurrency.id }).exists? %>
+          <% watchlist = current_user.watchlists.joins(:cryptocurrencies).where(cryptocurrencies: { id: cryptocurrency.id }).first %>
+          <%= button_to 'Delete', watchlist_remove_coin_path(watchlist_id: watchlist.id, cryptocurrency_id: cryptocurrency.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+        <% else %>
+          <% watchlist = current_user.watchlists.new %>
+          <% watchlist.id = -cryptocurrency.id %> <!-- Assign a temporary negative ID -->
+          <%= button_to 'Add', watchlist_add_coin_path(watchlist_id: watchlist.id, cryptocurrency_id: cryptocurrency.id), method: :post, class: "btn btn-sm btn-primary", remote: true, data: { toggle: 'modal', target: '#myModal' } %>
         <% end %>
-
-        </tbody>
+      <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add to Watchlist</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <% if user_signed_in? %>
+          <% current_user.watchlists.each do |watchlist| %>
+                  <% @cryptocurrencies.each do |cryptocurrency| %>
+            <%= link_to watchlist.name, add_to_watchlist_path(watchlist_id: watchlist.id, cryptocurrency_id: cryptocurrency.id), method: :post, class: "btn btn-sm btn-primary" %>
+          <% end %>
+          <% end %>
+          <%= link_to 'Create a New Watchlist', new_watchlist_path, class: "btn btn-sm btn-success" %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-            
-    
