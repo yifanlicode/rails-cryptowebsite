@@ -1,6 +1,10 @@
 class CryptocurrenciesWatchlistController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @watchlist = current_user.watchlists.first if user_signed_in?
+  end
+
   def add_to_watchlist
     @cryptocurrency = Cryptocurrency.find(params[:id])
 
