@@ -6,21 +6,34 @@ class WatchlistsController < ApplicationController
   def index
     @watchlists = current_user.watchlists
     @new_watchlist = Watchlist.new
+    @user = current_user
   end
 
-  # show a single watchlist and its coins
+  def new
+    @watchlist = Watchlist.new
+  end
+
+  # show all the cryptocurrencies_watchlists for the user
   def show
+    @watchlist = current_user.watchlists.find(params[:id])
+    @user = current_user
   end
 
   # create a new watchlist
   def create
-    @watchlist = current_user.watchlists.build(watchlist_params)
+    @user = current_user
+    @watchlist = @user.watchlists.build(watchlist_params)
+
     if @watchlist.save
-      redirect_to watchlists_path, notice: "Watchlist created successfully."
+      @watchlists = @user.watchlists # Set @watchlists variable after creating a new watchlist
+      redirect_to watchlists_path, notice: 'Watchlist was successfully created.'
     else
-      # Handle validation errors
-      render :index
+      render :new
     end
+  end
+
+  def watchlist_params
+    params.require(:watchlist).permit(:name)
   end
 
   # Update the name of a watchlist
@@ -33,6 +46,7 @@ class WatchlistsController < ApplicationController
       render :edit
     end
   end
+  
 
   def destroy
     @watchlist = current_user.watchlists.find(params[:id])

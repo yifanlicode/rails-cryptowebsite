@@ -1,6 +1,39 @@
-<%# 显示该登录用户名下创建的所有 watchlist %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h4>Watchlists</h4>
+      <p >Welcome,<%= @user.email %>!</p>
 
-<%# Path: app/views/watchlists/index.html.erb %>
+    </div>
+  </div>
 
-<%# start %>
+  <div class="row">
+    <div class="col-12">
+      <% @watchlists.each do |watchlist| %>
+        <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn btn-primary mb-3">
+          <%= watchlist.name %>
+        </a>
+      <% end %>
+    </div>
+  </div>
 
+  <br>
+
+  <br>
+
+  <br>
+
+  <br>
+
+  <br>
+
+  <br>
+
+  <br>
+  <div class="row">
+    <div class="col-12">
+      <h4>Create a new watchlist</h4>
+      <%= link_to "Create a watchlist", new_watchlist_path, class: "btn btn-success" %>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <%# app/views/cryptocurrencies_watchlist/index.html.erb %>
 <%# This is the default Watchlist for user  %>
 
-<h1>My Watchlist</h1>
+<h3>My Watchlist</h3>
 
 <table class="table table-hover table-striped table-bordered">
 
@@ -45,6 +45,13 @@
     <% end %>
   </tbody>
 </table>
+
+
+<%# show the user's all the watchlist %>
+
+<div>
+<%= link_to 'View All Watchlists', watchlists_path, class: 'btn btn-primary' %>
+</div>
 
 
 

@@ -1,0 +1,11 @@
+
+<h1>Create a New Watchlist</h1>
+
+<%= form_with(model: @watchlist, url: watchlists_path) do |form| %>
+  <!-- Form fields for watchlist attributes -->
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <!-- Submit button -->
+  <%= form.submit "Create Watchlist" %>
+<% end %>
