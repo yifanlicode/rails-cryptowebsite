@@ -1,5 +1,6 @@
+
 <div id="<%= dom_id cryptocurrency %>"
-style="box-shadow: 0 0 5px <%= cryptocurrency.color %>, 0 0 10px rgba(0, 0, 0, 0.1);"
+  style="box-shadow: 0 0 5px <%= cryptocurrency.color %>, 0 0 10px rgba(0, 0, 0, 0.1);"
   class="card">
 
 <%# header  %>
@@ -35,13 +36,27 @@ style="box-shadow: 0 0 5px <%= cryptocurrency.color %>, 0 0 10px rgba(0, 0, 0, 0
     <p class="card-text">
       <strong>Update:</strong> <%= cryptocurrency.updated_at %>
     </p>
+
   
     <%# sparkline %>
     <div class="chart-container" style="width: 800px; height: 200px;" id="sparkline-data">
       <strong>Last 20 days:</strong>
       <canvas id="sparkline-<%= dom_id @cryptocurrency %>"></canvas>
     </div>
+
+    <!-- Display associated watchlists -->
+    <br>
+      <div class="mt-3">
+        <strong>It belongs to these Watchlists:</strong>
+        <ul>
+         <% @cryptocurrency.watchlists.each do |watchlist| %>
+            <li><%= link_to watchlist.name, cryptocurrencies_watchlist_index_path %></li>
+          <% end %>
+        </ul>
+      </div>
+
   </div>
+
 
 </div>
 
