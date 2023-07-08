@@ -7,38 +7,31 @@
   </div>
 
  <table class="table table-hover table-striped table-bordered">
-
     <thead class="table-dark custom-data-center">
       <tr>
         <th> Watchlist </th>
-        <th> Edit </th>
-        <th> Delete </th>
+        <th> Actions </th>
       </tr>
     </thead>
 
     <tbody>
-
       <% @watchlists.each do |watchlist| %>
         <tr> 
-
         <td class="custom-data-center"> 
-          <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn btn-primary mb-3">
-            <%= watchlist.name %>
+          <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn">
+            <strong><%= watchlist.name %></strong>
           </a>
-
         </td>
 
         <td class="custom-data-center"> 
-          <%= link_to "Edit", edit_watchlist_path(watchlist), class: "btn btn-secondary mb-3" %>
+           <%= link_to "Edit", edit_watchlist_path(watchlist), class: "btn btn-secondary mb-3" %>
+          <%= button_to "Delete", watchlist_path(watchlist), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary mb-3" %>
         </td>
 
-        <td class="custom-data-center"> 
-          <%= link_to "Delete", watchlist_path(watchlist), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary mb-3" %>
-        </td>
       
       <% end %>
 
-    </tbody>
+    </tbody>      
 
   </table>
   

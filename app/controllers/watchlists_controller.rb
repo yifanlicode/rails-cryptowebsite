@@ -7,8 +7,6 @@ class WatchlistsController < ApplicationController
       if params[:keyword].present?
         redirect_to cryptocurrencies_path(keyword: params[:keyword])
       end
-    
-
     @watchlists = current_user.watchlists
     @new_watchlist = Watchlist.new
     @user = current_user
@@ -41,24 +39,27 @@ class WatchlistsController < ApplicationController
     params.require(:watchlist).permit(:name)
   end
 
-  # Update the name of a watchlist
+  # edit page for a watchlist name collection
+  def edit
+    @watchlist = current_user.watchlists.find(params[:id])
+  end
+
+  # update the name of a watchlist
   def update
     @watchlist = current_user.watchlists.find(params[:id])
-
-    if @watchlist.update(watchlist_params)
-      redirect_to @watchlist, notice: "Watchlist updated successfully."
-    else
-      render :edit
-    end
+    @watchlist.update(watchlist_params)
+    redirect_to watchlists_path, notice: 'Watchlist was successfully updated.'
   end
-  
+
+
+  # delete a watchlist from watchlists
 
   def destroy
     @watchlist = current_user.watchlists.find(params[:id])
+    @watchlist.cryptocurrencies.clear
     @watchlist.destroy
-    redirect_to watchlists_path, notice: "Watchlist deleted successfully."
+    redirect_to watchlists_path, notice: 'Watchlist was successfully destroyed.'
   end
-
  
  
 

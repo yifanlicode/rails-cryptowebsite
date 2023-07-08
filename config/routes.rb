@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :watchlists
 
+
   get 'cryptocurrencies/search', to: 'cryptocurrencies#search', as: 'search_cryptocurrencies'
 
   get 'home/about', to: 'home#about'
