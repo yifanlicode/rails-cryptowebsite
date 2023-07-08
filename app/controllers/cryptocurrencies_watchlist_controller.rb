@@ -5,7 +5,8 @@ class CryptocurrenciesWatchlistController < ApplicationController
       if params[:keyword].present?
         redirect_to cryptocurrencies_path(keyword: params[:keyword])
       end
-    @watchlist = current_user.watchlists.first if user_signed_in?
+
+    @watchlist = current_user.watchlists.find(params[:id]) if user_signed_in?
   end
 
   def add_to_watchlist
@@ -38,7 +39,7 @@ class CryptocurrenciesWatchlistController < ApplicationController
     end
   
     flash[:notice] = "#{@cryptocurrency.symbol} has been removed from your watchlists."
-    redirect_to cryptocurrencies_path
+    redirect_to cryptocurrencies_watchlist_path
   end
   
 end

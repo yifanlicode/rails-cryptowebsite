@@ -19,9 +19,7 @@
       <% @watchlists.each do |watchlist| %>
         <tr> 
         <td class="custom-data-center"> 
-          <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn">
-            <strong><%= watchlist.name %></strong>
-          </a>
+          <%= link_to watchlist.name, cryptocurrencies_watchlist_index_path(id: watchlist.id) %>
         </td>
 
       <td class="custom-data-center"> 
@@ -37,6 +35,5 @@
     </tbody>      
 
   </table>
-
-</div>
+  
 
