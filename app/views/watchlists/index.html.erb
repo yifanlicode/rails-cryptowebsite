@@ -3,37 +3,49 @@
     <div class="col-12">
       <h4>Watchlists</h4>
       <p >Welcome,<%= @user.email %>!</p>
-
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-12">
+ <table class="table table-hover table-striped table-bordered">
+
+    <thead class="table-dark custom-data-center">
+      <tr>
+        <th> Watchlist </th>
+        <th> Edit </th>
+        <th> Delete </th>
+      </tr>
+    </thead>
+
+    <tbody>
+
       <% @watchlists.each do |watchlist| %>
-        <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn btn-primary mb-3">
-          <%= watchlist.name %>
-        </a>
+        <tr> 
+
+        <td class="custom-data-center"> 
+          <a href="<%= cryptocurrencies_watchlist_index_path(watchlist) %>" class="btn btn-primary mb-3">
+            <%= watchlist.name %>
+          </a>
+
+        </td>
+
+        <td class="custom-data-center"> 
+          <%= link_to "Edit", edit_watchlist_path(watchlist), class: "btn btn-secondary mb-3" %>
+        </td>
+
+        <td class="custom-data-center"> 
+          <%= link_to "Delete", watchlist_path(watchlist), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-secondary mb-3" %>
+        </td>
+      
       <% end %>
-    </div>
-  </div>
 
-  <br>
+    </tbody>
 
-  <br>
-
-  <br>
-
-  <br>
-
-  <br>
-
-  <br>
-
-  <br>
+  </table>
+  
   <div class="row">
     <div class="col-12">
       <h4>Create a new watchlist</h4>
-      <%= link_to "Create a watchlist", new_watchlist_path, class: "btn btn-success" %>
+      <%= link_to "Create a watchlist", new_watchlist_path, class: "btn btn-secondary" %>
     </div>
   </div>
 </div>

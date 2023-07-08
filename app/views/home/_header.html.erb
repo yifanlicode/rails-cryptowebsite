@@ -23,24 +23,29 @@
         %>
 
 
-      <%# Coin List Page %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Coins",cryptocurrencies_path,
-        class:"nav-link #{'active' if controller_name == 'cryptocurrencies' && action_name == 'index'}"
-        %>
-
       <%# About APIs %>
       <li class="nav-item ms-lg-2 ">
            <%= link_to "About",
           home_about_path,class:"nav-link #{'active' if controller_name == 'home' && action_name == 'about'}"
           %>
       </li>
-  
-      <%# Search %>
+
+      <%# Token List Page %>
+      <li class="nav-item ms-lg-2 ">
+        <%= link_to "All Tokens",cryptocurrencies_path,
+        class:"nav-link #{'active' if controller_name == 'cryptocurrencies' && action_name == 'index'}"
+        %>
+      </li>
+
+     <%# Search %>    
       <form class="d-flex ms-lg-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <%= form_tag(cryptocurrencies_path, method: :get) do %>
+          <%= text_field_tag :keyword, params[:keyword], placeholder: 'Enter Token Name' %>
+          <%= select_tag :category, options_for_select(['All', 'Top 100', 'Potential Tokens'], params[:category]), prompt: 'Select Category' %>
           <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        <% end %>   
+    </form>
+
 
       <% if user_signed_in? %>
   

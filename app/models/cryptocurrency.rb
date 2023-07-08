@@ -1,5 +1,4 @@
 class Cryptocurrency < ApplicationRecord
-
   paginates_per 50
 
   has_many :cryptocurrencies_watchlists

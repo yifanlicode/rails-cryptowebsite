@@ -4,6 +4,11 @@ class WatchlistsController < ApplicationController
 
   # show all watchlists
   def index
+      if params[:keyword].present?
+        redirect_to cryptocurrencies_path(keyword: params[:keyword])
+      end
+    
+
     @watchlists = current_user.watchlists
     @new_watchlist = Watchlist.new
     @user = current_user

@@ -2,6 +2,9 @@ class CryptocurrenciesWatchlistController < ApplicationController
   before_action :authenticate_user!
 
   def index
+      if params[:keyword].present?
+        redirect_to cryptocurrencies_path(keyword: params[:keyword])
+      end
     @watchlist = current_user.watchlists.first if user_signed_in?
   end
 

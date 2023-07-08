@@ -35,10 +35,9 @@
           <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.volume_24h) %> </td>
           <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
 
-          <%# add and remove  %>
-          <%# 当用户点击 add,检查该 watchlist 是否有 coin 如果没有,显示 add 如果有显示 delete %>
+          <%# CRUD  %>
           <td class="custom-data-center">
-          <%# 检查用户是否登录 %>
+          <%# Check if the user signed or not %>
           <% if user_signed_in? && @watchlist&.cryptocurrencies&.include?(cryptocurrency) %>
             <%= button_to 'Delete', remove_from_watchlist_path(id: cryptocurrency.id), method: :delete %>
             <% else %>
@@ -53,5 +52,6 @@
 </table>
 
 <%= paginate @cryptocurrencies %>
+
 
 
