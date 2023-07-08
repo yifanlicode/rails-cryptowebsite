@@ -1,8 +1,7 @@
-# README
+# CoinRocket
 
-![image.png](https://s2.loli.net/2023/07/08/qJ7ESQBdliIXDw3.png)
 This is a cryptocurrency watchlist application built with Ruby on Rails.
-CoinRocket as it is - perfect for anyone looking to get a 360 overview on the crypto markets.
+![image.png](https://s2.loli.net/2023/07/08/qJ7ESQBdliIXDw3.png)
 
 ## Top Features
 
@@ -24,7 +23,7 @@ CoinRocket as it is - perfect for anyone looking to get a 360 overview on the cr
 - Users can add and remove cryptocurrencies to their watchlists.
   ![image.png](https://s2.loli.net/2023/07/08/SlMqBvKtmEWVn8c.png)
 
-## Step by Step to Build this App
+## Step by Step to Build
 
 ### 1. Gathering and Storing Data
 
@@ -157,17 +156,17 @@ Coins page -> Coin details page -> Add to watchlist -> Watchlist page
 
 ### 3. Pagination and Search
 
-Use the [kaminari gem](https://github.com/kaminari/kaminari) to add pagination to the index page.
+- Use the [kaminari gem](https://github.com/kaminari/kaminari) to add pagination to the index page.
 
-Easy to search and filter cryptocurrencies by name and rank.
+- Easy to search and filter cryptocurrencies by name and rank.
 
-Search a cryptocurrency by name, symbol in Top100 or All or Potential coins.
+- Search a cryptocurrency by name, symbol in Top100 or All or Potential coins.
 
 ### 4. Markup and Design
 
-Bootstrap 5
-Erb Conditional (if user is logged in, show the watchlist)
-HTML Validation
+- Bootstrap 5
+- Erb Conditional (if user is logged in, show the watchlist)
+- HTML Validation
 
 #### 5.Source Control
 
@@ -177,3 +176,27 @@ Use Git and GitHub to track changes and manage version control.
 
 Haven't deployed yet.
 Plan to deploy to Heroku.
+
+## Resources
+
+- [Ruby on Rails 實戰聖經](https://ihower.tw/rails/)
+  Good ebook to learn Ruby on Rails.
+
+- [Learn Ruby on Rails - Full Course](https://www.youtube.com/watch?v=fmyvWz5TUWg&t=7411s)
+  FreeCodeCamp Youtube video.
+
+- [Sample: Board Game](https://board-game-freak.fly.dev/)
+  A sample project built with Ruby on Rails and deployed to Fly.io.
+
+## Pitfalls
+
+- Many to many association between Cryptocurrency and Watchlist.
+  If you want to add a cryptocurrency to a watchlist, you need to create a CryptocurrenciesWatchlist object. It you want to remove a cryptocurrency from a watchlist, you need to destroy the CryptocurrenciesWatchlist object.
+
+- Devise gem
+  If you already have a User model, you need to run the migration to add the devise columns to the User table.
+
+- Search in the every page (navbar)
+  I add the search form in the navbar, so I need to add the search function in every controller.
+
+- .... A lot of pitfalls to learn.
