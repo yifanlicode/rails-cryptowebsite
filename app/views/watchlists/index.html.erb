@@ -1,16 +1,17 @@
-<div class="container">
+<div class="container" style="height:550px">
   <div class="row">
     <div class="col-12">
-      <h4>Watchlists</h4>
-      <p >Welcome,<%= @user.email %>!</p>
+      <h3>Watchlists</h3>
+      <p >Welcome,<%= @user.email %>, <%= link_to "Create your new watchlist", new_watchlist_path %> here !</p>
     </div>
   </div>
+  <br>
 
  <table class="table table-hover table-striped table-bordered">
     <thead class="table-dark custom-data-center">
       <tr>
         <th> Watchlist </th>
-        <th> Actions </th>
+        <th> </th>
       </tr>
     </thead>
 
@@ -23,9 +24,12 @@
           </a>
         </td>
 
-        <td class="custom-data-center"> 
-           <%= link_to "Edit", edit_watchlist_path(watchlist), class: "btn btn-primary mb-3" %>
-        </td>
+      <td class="custom-data-center"> 
+        <div class="button-group ">
+          <%= button_to "Edit", edit_watchlist_path(watchlist), method: :get %>
+          <%= button_to "Delete", watchlist_path(watchlist), method: :delete, data: { confirm: "Are you sure?" } %>
+        </div>
+      </td>
 
       
       <% end %>
@@ -33,11 +37,6 @@
     </tbody>      
 
   </table>
-  
-  <div class="row">
-    <div class="col-12">
-      <h4>Create a new watchlist</h4>
-      <%= link_to "Create a watchlist", new_watchlist_path, class: "btn btn-secondary" %>
-    </div>
-  </div>
+
 </div>
+

@@ -10,30 +10,35 @@ class CryptocurrenciesWatchlistController < ApplicationController
 
   def add_to_watchlist
     @cryptocurrency = Cryptocurrency.find(params[:id])
-
-    @watchlist = current_user.watchlists.first || current_user.watchlists.create(name: 'Default')
-
-    unless @watchlist.cryptocurrencies.include?(@cryptocurrency)
-      @watchlist.cryptocurrencies << @cryptocurrency
-      flash[:notice] = "#{@cryptocurrency.name} has been added to your watchlist."
+    @user = current_user
+    @watchlists = @user.watchlists
+  
+    # Find the selected watchlist by its ID
+    selected_watchlist = @watchlists.find(params[:watchlist_id])
+  
+    if selected_watchlist.cryptocurrencies.include?(@cryptocurrency)
+      flash[:alert] = "#{selected_watchlist.name} already includes #{@cryptocurrency}"
     else
-      flash[:alert] = "#{@cryptocurrency.name} is already in your watchlist."
+      selected_watchlist.cryptocurrencies << @cryptocurrency
+      flash[:notice] = "#{@cryptocurrency.symbol} has been added to #{selected_watchlist.name}"
     end
-
+  
     redirect_to cryptocurrencies_path
   end
+  
 
   def remove_from_watchlist
     @cryptocurrency = Cryptocurrency.find(params[:id])
-    @watchlist = current_user.watchlists.first
-
-    if @watchlist.cryptocurrencies.include?(@cryptocurrency)
-      @watchlist.cryptocurrencies.delete(@cryptocurrency)
-      flash[:notice] = "#{@cryptocurrency.name} has been removed from your watchlist."
-    else
-      flash[:alert] = "#{@cryptocurrency.name} is not in your watchlist."
+    @watchlists = current_user.watchlists
+  
+    @watchlists.each do |watchlist|
+      if watchlist.cryptocurrencies.include?(@cryptocurrency)
+        watchlist.cryptocurrencies.delete(@cryptocurrency)
+      end
     end
-
+  
+    flash[:notice] = "#{@cryptocurrency.symbol} has been removed from your watchlists."
     redirect_to cryptocurrencies_path
   end
+  
 end

@@ -11,82 +11,61 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-  
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <%# Home Page %>
+        <li class="nav-item ms-lg-2 ">
+          <%= link_to "Home", root_path, class: "nav-link #{'active' if controller_name == 'home' && action_name == 'index'}" %>
+        </li>
 
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <%# About APIs %>
+        <li class="nav-item ms-lg-2 ">
+          <%= link_to "About", home_about_path, class: "nav-link #{'active' if controller_name == 'home' && action_name == 'about'}" %>
+        </li>
 
-      <%# Home Page %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Home",root_path,
-        class:"nav-link #{'active' if controller_name == 'home' && action_name == 'index'}"
-        %>
+        <%# Token List Page %>
+        <li class="nav-item ms-lg-2 ">
+          <%= link_to "Coins", cryptocurrencies_path, class: "nav-link #{'active' if controller_name == 'cryptocurrencies' && action_name == 'index'}" %>
+        </li>
 
+        <%# Search %>
+        <li class="nav-item ms-lg-3">
+          <%= form_tag(cryptocurrencies_path, method: :get, class: "d-flex", role: "search") do %>
+            <%= text_field_tag :keyword, params[:keyword], placeholder: 'Enter Token Name' %>
+            <%= select_tag :category, options_for_select(['All', 'Top 100', 'Potential Tokens'], params[:category]) %>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          <% end %>
+        </li>
 
-      <%# About APIs %>
-      <li class="nav-item ms-lg-2 ">
-           <%= link_to "About",
-          home_about_path,class:"nav-link #{'active' if controller_name == 'home' && action_name == 'about'}"
-          %>
-      </li>
+        <% if user_signed_in? %>
+          <%# Watchlists %>
+          <li class="nav-item ms-lg-2 ">
+            <%= link_to "Watchlists", watchlists_path, class: "nav-link #{'active' if controller_name == 'watchlists' && action_name == 'index'}" %>
+          </li>
 
-      <%# Token List Page %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "All Tokens",cryptocurrencies_path,
-        class:"nav-link #{'active' if controller_name == 'cryptocurrencies' && action_name == 'index'}"
-        %>
-      </li>
+          <%# Profile %>
+          <li class="nav-item ms-lg-2 ">
+            <%= link_to "Profile", edit_user_registration_path, class: "nav-link #{'active' if controller_name == 'registrations' && action_name == 'edit'}" %>
+          </li>
 
-     <%# Search %>    
-      <form class="d-flex ms-lg-3" role="search">
-          <%= form_tag(cryptocurrencies_path, method: :get) do %>
-          <%= text_field_tag :keyword, params[:keyword], placeholder: 'Enter Token Name' %>
-          <%= select_tag :category, options_for_select(['All', 'Top 100', 'Potential Tokens'], params[:category]), prompt: 'Select Category' %>
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        <% end %>   
-    </form>
+          <%# Log Out %>
+          <li class="nav-item ms-lg-2 ">
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link #{'active' if controller_name == 'sessions' && action_name == 'destroy'}" %>
+          </li>
 
+        <% else %>
+          <%# Sign Up %>
+          <li class="nav-item ms-lg-2 ">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link #{'active' if controller_name == 'registrations' && action_name == 'new'}" %>
+          </li>
 
-      <% if user_signed_in? %>
-  
-      <%# Watchliss %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Watchlists",watchlists_path,
-        class:"nav-link #{'active' if controller_name == 'watchlists' && action_name == 'index'}"
-        %>
-
-      <%# Profile %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Profile",edit_user_registration_path,
-        class:"nav-link #{'active' if controller_name == 'registrations' && action_name == 'edit'}"
-        %>
-      </li>
-
-      <%# Log Out %>
-      <%= link_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link #{'active' if controller_name == 'sessions' && action_name == 'destroy'}" %>
-
-
-      <% else %>
-      <%# Sign Up %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Sign Up",new_user_registration_path, 
-        class:"nav-link #{'active' if controller_name == 'registrations' && action_name == 'new'}"
-        %>
-
-      <%# Log In %>
-      <li class="nav-item ms-lg-2 ">
-        <%= link_to "Log In",new_user_session_path,
-        class:"nav-link #{'active' if controller_name == 'sessions' && action_name == 'new'}"
-        %>
-      </li>
-
-      <% end %>
-
-
-  
-    </ul>
-  
+          <%# Log In %>
+          <li class="nav-item ms-lg-2 ">
+            <%= link_to "Log In", new_user_session_path, class: "nav-link #{'active' if controller_name == 'sessions' && action_name == 'new'}" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
 </nav>
 <br>

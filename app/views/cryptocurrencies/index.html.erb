@@ -12,7 +12,7 @@
           <th> 1d </th>
           <th> 24h Volumn </th>
           <th> Market Cap </th>
-          <th> Watchlist </th>
+          <th><%= link_to 'Watchlists', watchlists_path, class: 'watchlists-link' %></th>
         </tr>
     </thead>
 
@@ -36,18 +36,24 @@
           <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
 
           <%# CRUD  %>
-          <td class="custom-data-center">
-          <%# Check if the user signed or not %>
-          <% if user_signed_in? && @watchlist&.cryptocurrencies&.include?(cryptocurrency) %>
-            <%= button_to 'Delete', remove_from_watchlist_path(id: cryptocurrency.id), method: :delete %>
+         <td class="custom-data-center">
+            <% if user_signed_in? %>
+              <% if @watchlist&.cryptocurrencies&.include?(cryptocurrency) %>
+                <%= form_with url: remove_from_watchlist_path(id: cryptocurrency.id), method: :delete do |form| %>
+                  <%= form.submit 'Remove',class: 'btn btn-sm btn-danger' %>
+                <% end %>
+              <% else %>
+                <%= form_with url: add_to_watchlist_path(id: cryptocurrency.id), method: :post do |form| %>
+                  <%= form.submit 'Add', class: 'btn btn-sm btn-primary' %>
+                  <%= form.select :watchlist_id, options_from_collection_for_select(current_user.watchlists, :id, :name), class: 'custom-select' %>
+                <% end %>
+              <% end %>
             <% else %>
-            <%= button_to 'Add', add_to_watchlist_path(id: cryptocurrency.id), method: :post %>           
-             <% end %>
+              <%= button_to 'Add', add_to_watchlist_path(id: cryptocurrency.id), method: :post %>
+            <% end %>
           </td>
-
       </tr>
     <% end %>
-
   </tbody>
 </table>
 
