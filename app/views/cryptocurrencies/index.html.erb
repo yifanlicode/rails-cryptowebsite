@@ -1,5 +1,21 @@
 <%# app/views/cryptocurrencies/index.html.erb %>
+
+
+
+<%# ERD Conditional Part  %>
+<% if user_signed_in? %>
+  <div class="alert alert-success" role="alert">
+    Welcome <%= current_user.email %>
+  </div>
+<% else %>
+  <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-primary" %>
+<% end %>
+
+
 <%= paginate @cryptocurrencies %>
+
+
+
 
 <table class="table table-hover table-striped table-bordered">
 
@@ -23,7 +39,7 @@
 
           <td class="custom-data-center"> <%= cryptocurrency.rank %> </td>
           <td class="custom-data-center"> 
-            <%= image_tag cryptocurrency.icon_url,  class: "img-fluid img-coin custom-icon" %>
+            <%= image_tag cryptocurrency.icon_url,  class: "img-fluid img-coin custom-icon",alt:"icon" %>
           </td>
           <td class="custom-data-center"> 
             <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 

@@ -9,7 +9,6 @@ class HomeController < ApplicationController
 
   def about
 
-
       if params[:keyword].present?
         redirect_to cryptocurrencies_path(keyword: params[:keyword])
       end

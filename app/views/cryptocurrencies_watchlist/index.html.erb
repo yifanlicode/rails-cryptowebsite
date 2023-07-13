@@ -24,7 +24,7 @@
       <tr>
          <td class="custom-data-center"> <%= cryptocurrency.rank %> </td>
           <td class="custom-data-center"> 
-            <%= image_tag cryptocurrency.icon_url,  class: "img-fluid img-coin custom-icon" %>
+            <%= image_tag cryptocurrency.icon_url,  class: "img-fluid img-coin custom-icon",alt:"icon" %>
           </td>
           <td class="custom-data-center"> 
             <%= link_to cryptocurrency.symbol,cryptocurrency_path(cryptocurrency) %> 
@@ -37,7 +37,7 @@
           <td class="custom-data-right"> $<%= number_with_delimiter(cryptocurrency.market_cap) %> </td>
            <td class="custom-data-center"> 
            
-            <%= button_to 'Delete', remove_from_watchlist_path(id: cryptocurrency.id), method: :delete %>
+            <%= button_to 'Delete', remove_from_watchlist_path(id: cryptocurrency.id), method: :delete ,autocomplete: :off %>
            
            </td>
 
